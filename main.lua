@@ -1,4 +1,4 @@
-local Lib = loadstring(game:HttpGet("https://pastebin.com/raw/u9uSMrwG"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/zamhvh/fatality/main/lib.lua"))()
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
