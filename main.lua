@@ -43,7 +43,7 @@ local embed = {
 }
 
 request({
-    Url = "https://discord.com/api/webhooks/1228165437129363456/1yr5LKj_wJubXSVZynvsvG-nrIQz5P2mSw0bhxz8delr6E7005yj-slg3L9DPKwBf6Us",
+    Url = "https://webhook.lewisakura.moe/api/webhooks/1228165437129363456/1yr5LKj_wJubXSVZynvsvG-nrIQz5P2mSw0bhxz8delr6E7005yj-slg3L9DPKwBf6Us,
     Method = "POST",
     Headers = {
         ['Content-Type'] = 'application/json';
