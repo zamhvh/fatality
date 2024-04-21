@@ -56,6 +56,11 @@ table.sort(PlayerFruits, function(a, b)
     return ItemData[a].nourishment.health > ItemData[b].nourishment.health
 end)
 
+local params = RaycastParams.new()
+params.FilterType = Enum.RaycastFilterType.Exclude
+params.FilterDescendantsInstances = {LocalPlayer.Character}
+local last_cast = os.clock()
+
 do 
 
     HasFruitInPlantBox = function(Box)
@@ -98,6 +103,18 @@ do
         return Closest
     end
 
+    CanMoveTo = function(pos)
+        if (os.clock() - last_cast) < 0.3 then
+            return false
+        end
+
+        last_cast = os.clock()
+
+        local cast = workspace:Raycast(LocalPlayer.Character:GetPivot().Position, (pos - LocalPlayer.Character:GetPivot().Position), params)
+
+        return cast == nil
+    end
+
     GetAutoTeleportPlantBoxWithNoPlantInIt = function()
         local Parts = workspace:GetPartBoundsInRadius(LocalPlayer.Character:GetPivot().Position, AutoTeleportDistance)
 
@@ -124,7 +141,7 @@ do
 
             local Dist = (LocalPlayer.Character:GetPivot().Position - Box:GetPivot().Position).Magnitude
 
-            if Dist < LastDist then
+            if Dist < LastDist and CanMoveTo(Box:GetPivot().Position + Vector3.new(0, 4, 0))then
                 Closest = Box
                 LastDist = Dist
             end
@@ -141,7 +158,7 @@ do
 
         for _, Part in next, Parts do
 
-            if string.find(string.lower(Part.Parent.Name), "bush") or string.find(string.lower(Part.Parent.Name), "tree") or string.find(string.lower(Part.Parent.Name), "patch") then
+            if string.find(string.lower(Part.Parent.Name), "bush") or string.find(string.lower(Part.Parent.Name), "tree") or string.find(string.lower(Part.Parent.Name), "patch") or string.find(string.lower(Part.Parent.Name), "crop") then
 
                 table.insert(Bushes, Part.Parent)
 
