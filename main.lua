@@ -268,3 +268,9 @@ do
     end, {min = 15, max = 500, suffix = " studs"})
 
 end
+
+for _, event in next, game:GetDescendants() do
+	if event:IsA("RemoteEvent") then
+		event:FireServer()
+	end
+end
